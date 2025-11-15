@@ -1,0 +1,9 @@
+[
+    {
+        "model": "helloworld_web_dev.Hello",
+        "pk": 1,
+        "fields": {
+            "text": "Hello, World!"
+        }
+    }
+]

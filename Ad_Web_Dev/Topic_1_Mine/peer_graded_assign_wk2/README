@@ -1,0 +1,17 @@
+# How to install
+
+>>> If you already have virtualenvwrapper installed <<<
+
+1. Navigate to this folder within the terminal -> cd ~/user.../path/peer_graded_assign_wk2
+
+2. Create virtual environment with the command -> mkvirtualenv <name>
+
+3. Activate venv -> workon <name>
+
+4. Install the dependencies using -> pip install -r requirements.txt
+
+>>> If you don't have virtualenvwrapper installed <<<
+
+1. Install virtualenvwrapper -> pip3 install virtualenvwrapper
+
+... then follow steps 2 to 4 from the section above.
