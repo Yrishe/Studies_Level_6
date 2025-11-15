@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import *
+from .forms import *
 
 def index(request):
     master_genes = Gene.objects.all() # query Gene table
@@ -28,3 +29,28 @@ def delete(request, pk):
     GeneAttributeLink.objects.filter(gene_id=pk).delete()
     Gene.objects.filter(pk=pk).delete()
     return HttpResponseRedirect('/')
+
+def create_ec(request):
+    master_genes = Gene.objects.all()
+    if request.method == 'POST':
+        form = ECForm(request.POST)
+        if form.is_valid():
+            ec = EC()
+            ec.ec_name = form.cleaned_data['ec_name']
+            ec.save()
+            return HttpResponseRedirect('/create_ec/')
+    else:
+        ecs = EC.objects.all()
+        form = ECForm()
+    return render(request, 'genedata/ec.html', {'form': form,'ecs': ecs, 'master_genes': master_genes})
+
+def create_gene(request):
+    if request.method == 'POST':
+        form = GeneForm(request.POST)
+        if form.is_valid():
+            gene = form.save()
+            return HttpResponseRedirect('/create_ec/')
+    else:
+        form = GeneForm()
+        master_genes = Gene.objects.all()
+    return render(request, 'genedata/create_gene.html', {'error':"failed", 'master_genes': master_genes, 'form': form})

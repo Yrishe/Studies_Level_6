@@ -1,3 +1,5 @@
+{% load bootstrap5 %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,6 +8,8 @@
         <meta name="keywords"
         content="HTML,gene,genes,advanced,web,development">
         <meta name="author" content="D.Buchan">
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
         <link rel="stylesheet" type="text/css" href="../static/css/genedata.css">
         {% comment %} <h1 id="application_title">Gene Browser</h1> {% endcomment %}
         {% comment %} <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/202002_Laboratory_instrument_dna.svg" id="logo" alt="dna logo"> {% endcomment %}

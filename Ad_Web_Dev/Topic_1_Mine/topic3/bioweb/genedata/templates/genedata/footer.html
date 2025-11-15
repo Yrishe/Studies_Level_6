@@ -1,9 +1,14 @@
+{% load bootstrap5 %}
 {% load my_tags %}
-</br>
-<p> Registered Genes: {% get_total_genes %}</p>
-        <div id="footer">
-            <hr>
-            <p>Author: {% author "Yarli Rabelo"%} | Date: {% todays_date %}</p>
+
+        <div class="container-fluid">
+            <div class="row"> 
+                <p> Registered Genes: {% get_total_genes %}</p>
+                <div class="col-md-12" id="footer">
+                    <hr>
+                    <p>Author: {% author "Yarli Rabelo"%} | Date: {% todays_date %}</p>
+                </div>
+            </div> 
         </div>
     </body>
 </html>
