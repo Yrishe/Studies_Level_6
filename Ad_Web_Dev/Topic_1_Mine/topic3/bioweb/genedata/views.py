@@ -32,6 +32,7 @@ def delete(request, pk):
 
 def create_ec(request):
     master_genes = Gene.objects.all()
+    ecs = EC.objects.all()
     if request.method == 'POST':
         form = ECForm(request.POST)
         if form.is_valid():
@@ -39,18 +40,21 @@ def create_ec(request):
             ec.ec_name = form.cleaned_data['ec_name']
             ec.save()
             return HttpResponseRedirect('/create_ec/')
+        else:
+            return render(request, 'genedata/ec.html', {'error': 'failed', 'ecs': ecs, 'form': form})
     else:
-        ecs = EC.objects.all()
         form = ECForm()
     return render(request, 'genedata/ec.html', {'form': form,'ecs': ecs, 'master_genes': master_genes})
 
 def create_gene(request):
+    master_genes = Gene.objects.all()
     if request.method == 'POST':
         form = GeneForm(request.POST)
         if form.is_valid():
             gene = form.save()
-            return HttpResponseRedirect('/create_ec/')
-    else:
+            return HttpResponseRedirect('/create_gene/')
+        else:
+            return render(request, 'genedata/create_gene.html', {'error': 'failed', 'master_genes': master_genes, 'form': form})
+    else: 
         form = GeneForm()
-        master_genes = Gene.objects.all()
-    return render(request, 'genedata/create_gene.html', {'error':"failed", 'master_genes': master_genes, 'form': form})
+    return render(request, 'genedata/create_gene.html', {'form': form, 'master_genes': master_genes})

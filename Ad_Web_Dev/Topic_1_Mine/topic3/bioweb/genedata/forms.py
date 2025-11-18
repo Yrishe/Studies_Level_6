@@ -1,9 +1,15 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Gene
+from .models import *
 
 class ECForm(forms.Form):
     ec_name = forms.CharField(label='EC Name', max_length=100)
+    
+    def clean(self):
+        clean_data = super(ECForm, self).clean()
+        ec_name = clean_data.get("ec_name")
+        if (not ec_name.isalpha()):
+            raise forms.ValidationError("EC Name must be alphabetic characters only")
     
 class GeneForm(ModelForm):
     class Meta:
@@ -11,12 +17,12 @@ class GeneForm(ModelForm):
         fields = ['gene_id', 'entity', 'start', 'stop', 'sense',
         'start_codon', 'sequencing', 'ec']
         
-def clean(self):
-    cleaned_data = super(GeneForm, self).clean()
-    entity = cleaned_data.get("entity")
-    sense = cleaned_data.get("sense")
-    if not entity == "Chromosome" and not entity == "Plasmid":
-        raise forms.ValidationError("Entity must be 'Chromosome'or 'Plasmid'")
-    if not sense == "+" and not sense == "-":
-        raise forms.ValidationError("Sense must be '+' or '-'")
-    return(cleaned_data)
+    def clean(self):
+        cleaned_data = super(GeneForm, self).clean()
+        entity = cleaned_data.get("entity")
+        sense = cleaned_data.get("sense")
+        if not entity == "Chromosome" and not entity == "Plasmid":
+            raise forms.ValidationError("Entity must be 'Chromosome'or 'Plasmid'")
+        if not sense == "+" and not sense == "-":
+            raise forms.ValidationError("Sense must be '+' or '-'")
+        return(cleaned_data)
