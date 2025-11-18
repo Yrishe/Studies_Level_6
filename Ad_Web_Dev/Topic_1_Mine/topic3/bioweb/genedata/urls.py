@@ -9,4 +9,8 @@ urlpatterns = [
     path('delete/<int:pk>', views.delete, name='delete'), # new path for delete view
     path('create_ec/', views.create_ec, name='create_ec'),
     path('create_gene/', views.create_gene, name='create_gene'),
+    path('', views.GeneList.as_view(), name='index'),
+    path('gene/<int:pk>', views.GeneDetail.as_view(), name='gene'),
+    path('create_gene/', views.GeneCreate.as_view(), name='create_gene'),
+    path('delete/<int:pk>', views.GeneDelete.as_views(), name='delete'),
 ]

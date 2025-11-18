@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import *
 from .forms import *
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, DeleteView
 
 def index(request):
     master_genes = Gene.objects.all() # query Gene table
@@ -58,3 +60,40 @@ def create_gene(request):
     else: 
         form = GeneForm()
     return render(request, 'genedata/create_gene.html', {'form': form, 'master_genes': master_genes})
+
+
+class GeneList(ListView):
+    model = Gene
+    context_obejct_name = 'master_genes'
+    template_name = 'genedata/index.html'
+    
+class GeneDetail(DetailView):
+    model = Gene
+    context_object_name = 'gene'
+    template_name = 'genedata/gene.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['master_genes'] = Gene.objects.all()
+        return context
+    
+class GeneCreate(CreateView):
+    model = Gene
+    template_name = 'genedata/create_gene.html'
+    form_class = GeneForm
+    success_url = '/create_gene/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['master_genes'] = Gene.objects.all()
+        return context
+    
+class GeneDelete(DeleteView):
+    model = Gene
+    success_url = '/'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['master_genes'] = Gene.objects.all()
+        return context
+    
