@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'genedata.apps.GenedataConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap5',
 ]
+
+#  REST framework settings (Entry point for REST API)
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
