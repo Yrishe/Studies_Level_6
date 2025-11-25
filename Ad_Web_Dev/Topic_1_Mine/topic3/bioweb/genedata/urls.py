@@ -12,6 +12,8 @@ urlpatterns = [
     path('create_ec/', views.create_ec, name='create_ec'),
     path('create_gene/', views.GeneCreate.as_view(), name='create_gene'),
     path('update/<int:pk>', views.GeneUpdate.as_view(), name='update'),
-    # path('list/<str:type>', views.GeneList.as_view(), name='list'),
     path('api/gene/<int:pk>/', api.gene_detail),
+    # API endpoints
+    # path('api/genes/', views.GeneList.as_view()),
+    path('api/genes/', api.genes_list),
 ]

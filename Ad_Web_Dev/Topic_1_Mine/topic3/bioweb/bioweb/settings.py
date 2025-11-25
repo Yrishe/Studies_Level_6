@@ -135,3 +135,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Default primary key field type for models
+# Use BigAutoField for new projects to avoid integer overflow on large tables
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
